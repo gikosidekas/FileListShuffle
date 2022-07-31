@@ -10,9 +10,10 @@ from os.path import isfile, join
 
 def print_shuffled_file_list():
     current_file_list_path = os.getcwd()
-    onlyfiles = [f for f in listdir(current_file_list_path + "/putFileHere") if isfile(join(current_file_list_path + "/putFileHere", f))]
-    onlyfiles = filter_shuffled_from_list(onlyfiles)
-    shuffle_and_save_files(current_file_list_path,onlyfiles)
+    onlyfiles = [f for f in listdir(current_file_list_path + "/putFileHere") if
+                 isfile(join(current_file_list_path + "/putFileHere", f))]
+    onlyfiles = strip_txt_postfix(onlyfiles)
+    shuffle_and_save_files(current_file_list_path, onlyfiles)
 
 
 def shuffle_list_times(times, words):
@@ -22,12 +23,11 @@ def shuffle_list_times(times, words):
     return words
 
 
-def filter_shuffled_from_list(files):
+def strip_txt_postfix(files):
     filtered = []
 
     for file in files:
-        if "_shuffled" not in file:
-            filtered.append(file.strip(".txt"))
+        filtered.append(file.strip(".txt"))
 
     return filtered
 
@@ -40,7 +40,7 @@ def shuffle_and_save_files(current_file_list_path, onlyfiles):
 
         with open(current_file_list_path + "/getFileHere/" + file + "_shuffled.txt", 'w') as w:
             for word in words:
-                w.write(word+"\n")
+                w.write(word + "\n")
 
 
 if __name__ == '__main__':
