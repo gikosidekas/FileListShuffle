@@ -27,7 +27,7 @@ def strip_txt_postfix(files):
     filtered = []
 
     for file in files:
-        filtered.append(file.strip(".txt"))
+        filtered.append(file.removesuffix(".txt"))
 
     return filtered
 
@@ -36,7 +36,7 @@ def shuffle_and_save_files(current_file_list_path, onlyfiles):
     for file in onlyfiles:
         with open(current_file_list_path + "/putFileHere/" + file + ".txt", 'r') as f:
             words = [line.strip() for line in f]
-            shuffle_list_times(24, words)
+            shuffle_list_times(100, words)
 
         with open(current_file_list_path + "/getFileHere/" + file + "_shuffled.txt", 'w') as w:
             for word in words:
